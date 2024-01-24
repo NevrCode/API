@@ -3,6 +3,7 @@ package main
 import (
 	"API/controller"
 	"API/initializer"
+	"os"
 
 	"net/http"
 
@@ -15,7 +16,9 @@ func init() {
 }
 
 func main() {
+
 	r := gin.Default()
+
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"message": "pong",
@@ -23,7 +26,13 @@ func main() {
 	})
 	r.GET("/showUser", controller.ShowUser)
 	r.GET("/showToko", controller.ShowToko)
-	r.Run()
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = "3000"
+	}
+
+	r.Run("0.0.0.0:" + port)
 }
 
 // func main() {
