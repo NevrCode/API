@@ -19,7 +19,7 @@ func main() {
 
 	r := gin.Default()
 	r.Use(func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000") // Ganti dengan origin aplikasi klien Anda
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "file:///C:/Users/Kevin/Documents/ProjectCoding/Go/Si%20Kantin%20API/API/view/index.html") // Ganti dengan origin aplikasi klien Anda
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
 
