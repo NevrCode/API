@@ -12,7 +12,7 @@
 
 </body>
 <script>
-    const apiUrl = 'https://api-production-5c4d.up.railway.app/ping';
+    const apiUrl = 'https://api-production-5c4d.up.railway.app/showAduh';
 
 // Make a GET request
 fetch(apiUrl)
@@ -23,7 +23,7 @@ fetch(apiUrl)
     return response.json();
   })
   .then(data => {
-    document.getElementById('apiData').innerHTML = JSON.stringify(data);
+    document.getElementById('apiData').innerHTML = data.aduh.n;
   })
   .catch(error => {
     console.error('Error:', error);

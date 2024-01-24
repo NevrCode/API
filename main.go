@@ -28,13 +28,15 @@ func main() {
 	})
 	r.GET("/showUser", controller.ShowUser)
 	r.GET("/showToko", controller.ShowToko)
+	r.GET("/showAduh", controller.ShowAduh)
 	port := os.Getenv("PORT")
 
 	if port == "" {
 		port = "3000"
 	}
 
-	r.Run("0.0.0.0:" + port)
+	// r.Run("0.0.0.0:" + port)
+	r.Run()
 }
 
 // func main() {
