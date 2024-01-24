@@ -13,6 +13,7 @@ import (
 func init() {
 	initializer.LoadEnvVariables()
 	initializer.ConnectToDB()
+	initializer.HeaderMiddleware()
 }
 
 func main() {
