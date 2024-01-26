@@ -3,9 +3,8 @@ package main
 import (
 	"API/controller"
 	"API/initializer"
-	"os"
-
 	"net/http"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -28,7 +27,8 @@ func main() {
 	})
 	r.GET("/showUser", controller.ShowUser)
 	r.GET("/showToko", controller.ShowToko)
-	r.GET("/showAduh", controller.ShowAduh)
+	r.POST("/showAduh", controller.ShowAduh)
+	r.POST("/createUser", controller.SignUp)
 	port := os.Getenv("PORT")
 
 	if port == "" {

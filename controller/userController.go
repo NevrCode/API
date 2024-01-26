@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 func ShowUser(c *gin.Context) {
@@ -33,6 +34,7 @@ func ShowUser(c *gin.Context) {
 // initializer.DB.Create(&user)
 // c.JSON(http.StatusOK, gin.H{"user": user})
 func SignUp(c *gin.Context) {
+	id := uuid.New()
 
 	// get nama, nama, pass
 	var body struct {
@@ -48,7 +50,7 @@ func SignUp(c *gin.Context) {
 	}
 
 	// create user
-	user := models.User{Email: body.Email, Nama_user: body.Nama_user, Password: body.Password}
+	user := models.User{ID_user: id.String(), Email: body.Email, Nama_users: body.Nama_user, Password: body.Password}
 	initializer.DB.Create(&user)
 	c.JSON(http.StatusOK, gin.H{"user": user})
 
