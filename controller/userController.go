@@ -35,6 +35,7 @@ func ShowUser(c *gin.Context) {
 // c.JSON(http.StatusOK, gin.H{"user": user})
 func SignUp(c *gin.Context) {
 	id := uuid.New()
+	role := "User"
 
 	// get nama, nama, pass
 	var body struct {
@@ -50,7 +51,7 @@ func SignUp(c *gin.Context) {
 	}
 
 	// create user
-	user := models.User{ID_user: id.String(), Email: body.Email, Nama_users: body.Nama_user, Password: body.Password}
+	user := models.User{ID_pembeli: id.String(), Email: body.Email, Nama_users: body.Nama_user, Password: body.Password, Role: role}
 	initializer.DB.Create(&user)
 	c.JSON(http.StatusOK, gin.H{"user": user})
 
