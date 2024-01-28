@@ -17,7 +17,7 @@
     <div id="output"></div>
     <form action="/createUser" method="POST" id="signup">
       <div class="mb-3 px-5">
-        <label for="1" class="form-label">Input Email</label>
+        <label for="email" class="form-label">Input Email</label>
         <input
           type="email"
           class="form-control"
@@ -26,7 +26,7 @@
         />
       </div>
       <div class="mb-3 px-5">
-        <label for="2" class="form-label">nama</label>
+        <label for="Nama_user" class="form-label">nama</label>
         <input
           type="text"
           class="form-control"
@@ -35,7 +35,7 @@
         />
       </div>
       <div class="mb-3 px-5">
-        <label for="3" class="form-label">pass</label>
+        <label for="Password" class="form-label">pass</label>
         <input
           type="password"
           class="form-control"
@@ -59,6 +59,9 @@
         event.preventDefault();
 
         var formData = new FormData(this);
+        var outputDiv = document.getElementById("output");
+        outputDiv.innerHTML = "<p>"+formData.body+"</p>";
+        outputDiv.innerHTML += "<p>"+document.getElementById("email").value+"</p>";
 
         fetch(apiUrl+ "/createUser", {
           method: "POST",
@@ -67,16 +70,10 @@
           .then((response) => response.json())
           .then((data) => {
             var outputDiv = document.getElementById("output");
-        outputDiv.innerHTML = "<p>All Items:</p><ul>";
-        data.aduh.forEach(function (item) {
-          outputDiv.innerHTML += "<li>" + item.nama + "</li>";
-        });
+        outputDiv.innerHTML = document.getElementById("email").value;
 
-        outputDiv.innerHTML += "</ul>";
           })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+          
       });
   </script>
 </html>
