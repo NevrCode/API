@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
+	"github.com/gorilla/sessions"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -22,18 +23,6 @@ func ShowUser(c *gin.Context) {
 	})
 }
 
-// var user models.User
-
-//	if err := c.ShouldBindJSON(&user); err != nil {
-//		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
-//			"message": "Error bang",
-//			"error":   err.Error(),
-//		})
-//		return
-//	}
-//
-// initializer.DB.Create(&user)
-// c.JSON(http.StatusOK, gin.H{"user": user})
 func SignUp(c *gin.Context) {
 	id := uuid.New()
 	role := "User"
@@ -80,25 +69,44 @@ func Login(c *gin.Context) {
 		})
 		return
 	}
-
-	if err := c.ShouldBindJSON(&user); err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
-			"message": "Error bang",
-			"error":   err.Error(),
-		})
-		return
-	}
-	initializer.DB.Create(&user)
-	c.JSON(http.StatusOK, gin.H{"user": user})
-
 	// SEARCH FOR AN USER
 	initializer.DB.First(&user, "email = ?", body.Email)
-
-	if user.ID_pembeli == "" {
+	if user.Email == "" {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"message": "Invalid email or password",
+			"message": "Invalid email",
 		})
 		return
 	}
+	// hash to pass
+	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(body.Password))
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": "Invalid Password",
+		})
+		return
+	}
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"message": "Logged in",
+	// })
+
+	session := c.MustGet("session").(*sessions.Session)
+	session.Values["authenticated"] = true
+	session.Save(c.Request, c.Writer)
+	session.Values["loggedIn"] = true
+	session.Values["user"] = user
+	c.JSON(http.StatusOK, gin.H{
+		"user": session.Values["user"],
+	})
 
 }
+
+// func userHandler(c *gin.Context) {
+// 	session := c.MustGet("session").(*sessions.Session)
+// 	authenticated := session.Values["authenticated"]
+// 	if authenticated != nil && authenticated.(bool) {
+// 		c.String(http.StatusOK, "User is authenticated")
+// 	} else {
+// 		c.String(http.StatusUnauthorized, "User is not authenticated")
+// 	}
+// }

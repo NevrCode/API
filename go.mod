@@ -5,10 +5,15 @@ go 1.21.6
 require gorm.io/gorm v1.25.5
 
 require (
+	github.com/go-session/gorm v0.0.0-20190223144354-7d5f87dcd6c3 // indirect
+	github.com/go-session/session v3.1.2+incompatible // indirect
 	github.com/google/uuid v1.6.0 // indirect
+	github.com/gorilla/securecookie v1.1.1 // indirect
+	github.com/gorilla/sessions v1.2.1 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/jackc/pgx/v5 v5.4.3 // indirect
+	github.com/jinzhu/gorm v1.9.16 // indirect
 )
 
 require (
@@ -36,6 +41,7 @@ require (
 	github.com/pelletier/go-toml/v2 v2.1.1 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
+	github.com/wader/gormstore/v2 v2.0.3
 	golang.org/x/arch v0.7.0 // indirect
 	golang.org/x/crypto v0.18.0 // indirect
 	golang.org/x/net v0.20.0 // indirect
